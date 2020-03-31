@@ -1,0 +1,61 @@
+FROM oai-build-base-20200325r5:latest AS builder
+MAINTAINER okinawaopenlabs <yoshifumi.sumida@okinawaopenlabs.org>
+
+ARG GIT_TAG=v1.2.1
+
+WORKDIR /root
+
+RUN git clone --depth 1 --branch=${GIT_TAG} https://gitlab.eurecom.fr/oai/openairinterface5g.git
+COPY patches patches/
+RUN patch -p1 -d openairinterface5g < patches/disable_building_nasmesh_and_rbtool.patch
+RUN cd openairinterface5g/cmake_targets && \
+    ln -sf /usr/local/bin/asn1c_oai /usr/local/bin/asn1c && \
+    ln -sf /usr/local/share/asn1c_oai /usr/local/share/asn1c && \
+    ./build_oai -c --eNB --hardware USRP --verbose-compile
+
+
+FROM ubuntu:16.04
+
+RUN apt-get update && \
+    apt-get install -y \
+        libboost-all-dev \
+        libsctp1 \
+        libconfig9 \
+        libprotobuf-c1 \
+        libusb-1.0-0 \
+        iproute2 \
+        iputils-ping \
+        procps \
+        dnsutils && \
+    apt-get clean && \
+    apt-get -y autoremove && \
+    rm -rf /var/lib/apt/lists/*
+
+ENV APP_ROOT=/opt/oai-enb
+ENV OAI_BUILD_ROOT=/root/openairinterface5g/cmake_targets/lte_build_oai/build
+ENV PATH=${APP_ROOT}:${PATH} HOME=${APP_ROOT}
+
+COPY --from=builder /root/openairinterface5g/cmake_targets/lte_build_oai/build/lte-softmodem ${APP_ROOT}/bin/
+COPY --from=builder /root/openairinterface5g/cmake_targets/lte_build_oai/build/*.so* /usr/local/lib
+COPY --from=builder /usr/local/bin/uhd_* /usr/local/bin
+COPY --from=builder /usr/local/share/uhd /usr/local/share/uhd
+COPY --from=builder /usr/local/lib /usr/local/lib
+COPY --from=builder /usr/lib/x86_64-linux-gnu /usr/lib/x86_64-linux-gnu
+COPY --from=builder /lib/x86_64-linux-gnu /lib/x86_64_linux-gnu
+
+RUN ldconfig
+
+WORKDIR ${APP_ROOT}
+
+# Add the built directory path
+ENV PATH ${PATH}:${APP_ROOT}/bin
+
+EXPOSE 2152/udp
+EXPOSE 22100/tcp
+EXPOSE 36412/udp
+EXPOSE 36422/udp
+EXPOSE 50000/udp
+EXPOSE 50001/udp
+
+# Run lte-softmodem with a sample option for USRP
+CMD ["lte-softmodem", "-O", "/config/enb.conf"]
