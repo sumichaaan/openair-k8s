@@ -1,5 +1,6 @@
 ARG REGISTRY=localhost
 FROM oai-build-base-20200401r1:ubt18 AS builder
+MAINTAINER YOSHIFUMI sumida <yoshifumi.sumida@okinawaopenlabs.org>
 
 ARG GIT_TAG="develop-vco3"
 
