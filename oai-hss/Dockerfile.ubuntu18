@@ -7,16 +7,18 @@ WORKDIR /root
 
 ARG GIT_OPENAIRCN_URL="https://github.com/OPENAIRINTERFACE/openair-cn.git"
 RUN git clone --depth=1 --branch=${GIT_TAG} ${GIT_OPENAIRCN_URL}
+
 COPY patches patches/
-RUN patch -p1 -d openair-cn < patches/enable_sudo-less_build.patch \
-    && patch -p1 -d openair-cn < patches/disable_distro_check_and_rpm_install.patch
+RUN patch -p1 -d openair-cn < patches/enable_sudo-less_build.patch && \
+    patch -p1 -d openair-cn < patches/disable_distro_check_and_rpm_install.patch && \
+    patch -p1 -d openair-cn < patches/checkout_specific_branch_for_cppdriver.patch
 
 RUN cd openair-cn/scripts && \
     ln -sf /usr/local/asn1c_cn /usr/local/bin/asn1c && \
     ln -sf /usr/local/share/asn1c_cn /usr/local/share/asn1c && \
     rm -rf /usr/local/lib/freeDiameter /usr/local/lib/libfd* && \
     OPENAIRCN_DIR=$(dirname $(pwd)) ./build_hss_rel14 --check-installed-software --force && \
-    OPENAIRCN_DIR=$(dirname $(pwd)) ./build_hss_rel14 -v
+    OPENAIRCN_DIR=$(dirname $(pwd)) ./build_hss_rel14 -c -v -b RelWithDebInfo
 
 
 FROM ubuntu:18.04
@@ -45,7 +47,9 @@ COPY --from=builder /usr/local/lib/libfd* /usr/local/lib/
 COPY --from=builder /usr/local/lib/freeDiameter/* /usr/local/lib/freeDiameter/
 COPY --from=builder /usr/local/lib/x86_64-linux-gnu/libcassandra* /usr/local/lib/x86_64-linux-gnu/
 COPY --from=builder /usr/local/lib/libuv.so /usr/local/lib/
+# COPY --from=builder /usr/lib/x86_64-linux-gnu/libuv* /usr/lib/x86_64-linux-gnu/
 
+# Loading libuv.so and so on
 RUN ldconfig
 
 COPY configs ${APP_ROOT}/etc/

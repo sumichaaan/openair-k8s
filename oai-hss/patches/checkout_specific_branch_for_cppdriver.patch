@@ -1,0 +1,12 @@
+diff --git a/build/tools/build_helper.hss_rel14 b/build/tools/build_helper.hss_rel14
+index 7d20e33f..201b974a 100644
+--- a/build/tools/build_helper.hss_rel14
++++ b/build/tools/build_helper.hss_rel14
+@@ -78,6 +78,7 @@ build_c_ares()
+ build_cpp_driver()
+ {
+   pushd $OPENAIRCN_DIR/build/git_submodules/cpp-driver
++  git checkout -f 2.15.0
+   rm -rf build
+   mkdir -p build
+   cd build
