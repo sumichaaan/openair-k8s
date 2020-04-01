@@ -126,6 +126,6 @@ build_install_uhd
 uhd_images_downloader
 build_install_freediameter
 build_install_liblfds
-# build_install_double-conversion
-# build_install_folly
+build_install_double-conversion
+build_install_folly
 build_install_libuv
