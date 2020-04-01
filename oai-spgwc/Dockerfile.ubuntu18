@@ -21,7 +21,7 @@ RUN apt-get update && \
     apt-get install -y \
         libboost-all-dev \
         libconfig++-dev \
-        libasan2 \
+        libasan4 \
         libevent-dev \
         libgflags-dev \
         libgoogle-glog-dev \
