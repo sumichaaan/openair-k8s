@@ -9,6 +9,7 @@ WORKDIR /root
 ARG GIT_OPENAIRCN_URL="https://github.com/OPENAIRINTERFACE/openair-cn.git"
 RUN git clone --depth=1 --branch=${GIT_TAG} ${GIT_OPENAIRCN_URL}
 
+# https://github.com/OPENAIRINTERFACE/openair-cn/pull/105/files
 COPY patches patches/
 RUN patch -p1 -d openair-cn < patches/enable_sudo-less_build.patch && \
     patch -p1 -d openair-cn < patches/disable_distro_check_and_rpm_install.patch && \
