@@ -1,5 +1,5 @@
 FROM oai-build-base-20200325r5:latest AS builder
-MAINTAINER okinawaopenlabs <yoshifumi.sumida@okinawaopenlabs.org>
+MAINTAINER YOSHIFUMI sumida <yoshifumi.sumida@okinawaopenlabs.org>
 
 ARG GIT_TAG=v1.2.1
 
