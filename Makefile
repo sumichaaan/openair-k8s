@@ -22,14 +22,19 @@ HSS_IMAGE_NAME          ?= ${DOCKER_REGISTRY}/${DOCKER_REPOSITORY}/${OAI_HSS_NAM
 SPGWC_IMAGE_NAME        ?= ${DOCKER_REGISTRY}/${DOCKER_REPOSITORY}/${OAI_SPGWC_NAME}:${DOCKER_TAG}
 SPGWU_IMAGE_NAME        ?= ${DOCKER_REGISTRY}/${DOCKER_REPOSITORY}/${OAI_SPGWU_NAME}:${DOCKER_TAG}
 
+
+
 build-all: build-base build-enb build-hss build-mme build-spgwc build-spgwu
 
+
+.PHONY: build-base
 build-base:
     ${DOCKER_ENV} docker build ${DOCKER_BUILD_ARGS} \
                     --tag ${BASE_IMAGE_NAME} \
                     --file ./${OAI_BASE_NAME}/Dockerfile.ubuntu${OS_RELEASE} \
                     ./${OAI_BASE_NAME}
 
+.PHONY: build-enb
 build-enb: build-base
     ${DOCKER_ENV} docker build ${DOCKER_BUILD_ARGS} \
                     --tag ${ENB_IMAGE_NAME} \
@@ -39,6 +44,7 @@ build-enb: build-base
                     --build-arg TAG=${DOCKER_TAG} \
                     ./${OAI_ENB_NAME}
 
+.PHONY: build-hss
 build-hss: build-base
     ${DOCKER_ENV} docker build ${DOCKER_BUILD_ARGS} \
                     --tag ${HSS_IMAGE_NAME} \
@@ -48,6 +54,7 @@ build-hss: build-base
                     --build-arg TAG=${DOCKER_TAG} \
                     ./${OAI_HSS_NAME}
 
+.PHONY: build-mme
 build-mme: build-base
     ${DOCKER_ENV} docker build ${DOCKER_BUILD_ARGS} \
                     --tag ${MME_IMAGE_NAME} \
@@ -57,6 +64,7 @@ build-mme: build-base
                     --build-arg TAG=${DOCKER_TAG} \
                     ./${OAI_MME_NAME}
 
+.PHONY: build-spgwc
 build-spgwc: build-base
     ${DOCKER_ENV} docker build ${DOCKER_BUILD_ARGS} \
                     --tag ${SPGWC_IMAGE_NAME} \
@@ -66,6 +74,7 @@ build-spgwc: build-base
                     --build-arg TAG=${DOCKER_TAG} \
                     ./${OAI_SPGWC_NAME}
 
+.PHONY: build-spgwu
 build-spgwu: build-base
     ${DOCKER_ENV} docker build ${DOCKER_BUILD_ARGS} \
                     --tag ${SPGWU_IMAGE_NAME} \
@@ -82,5 +91,3 @@ clean:
     docker rmi ${DOCKER_REGISTRY}/${DOCKER_REPOSITORY}/${OAI_MME_NAME}:${DOCKER_TAG}
     docker rmi ${DOCKER_REGISTRY}/${DOCKER_REPOSITORY}/${OAI_SPGWC_NAME}:${DOCKER_TAG}
     docker rmi ${DOCKER_REGISTRY}/${DOCKER_REPOSITORY}/${OAI_SPGWU_NAME}:${DOCKER_TAG}
-
-.PHONY: build-all build-base build-enb build-hss build-mme build-spgwc build-spgwu clean
