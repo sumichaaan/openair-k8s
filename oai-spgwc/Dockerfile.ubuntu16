@@ -1,5 +1,7 @@
 ARG REGISTRY=localhost
-FROM oai-build-base-20200401r1:latest AS builder
+ARG REPOSITORY=johndoe
+ARG TAG=ubt18
+FROM ${REGISTRY}/${REPOSITORY}/oai-build-base:${TAG} AS builder
 MAINTAINER YOSHIFUMI sumida <yoshifumi.sumida@okinawaopenlabs.org>
 
 ARG GIT_TAG="develop-vco3"
