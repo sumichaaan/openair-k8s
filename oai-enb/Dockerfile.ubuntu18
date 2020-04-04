@@ -1,4 +1,7 @@
-FROM oai-build-base-20200401r1:ubt18 AS builder
+ARG REGISTRY=localhost
+ARG REPOSITORY=johndoe
+ARG TAG=ubt18
+FROM ${REGISTRY}/${REPOSITORY}/oai-build-base:${TAG} AS builder
 MAINTAINER YOSHIFUMI sumida <yoshifumi.sumida@okinawaopenlabs.org>
 
 ARG GIT_TAG=v1.2.1
