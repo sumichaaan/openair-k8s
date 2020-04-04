@@ -1,6 +1,6 @@
 ARG REGISTRY=localhost
 ARG REPOSITORY=johndoe
-ARG TAG=ubt18
+ARG TAG=ubt16
 FROM ${REGISTRY}/${REPOSITORY}/oai-build-base:${TAG} AS builder
 MAINTAINER YOSHIFUMI sumida <yoshifumi.sumida@okinawaopenlabs.org>
 
