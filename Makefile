@@ -75,4 +75,12 @@ build-spgwu: build-base
                     --build-arg TAG=${DOCKER_TAG} \
                     ./${OAI_SPGWU_NAME}
 
-.PHONY: build-all build-base build-enb build-hss build-mme build-spgwc build-spgwu
+clean:
+    docker rmi ${DOCKER_REGISTRY}/${DOCKER_REPOSITORY}/${OAI_BASE_NAME}:${DOCKER_TAG}
+    docker rmi ${DOCKER_REGISTRY}/${DOCKER_REPOSITORY}/${OAI_ENB_NAME}:${DOCKER_TAG}
+    docker rmi ${DOCKER_REGISTRY}/${DOCKER_REPOSITORY}/${OAI_HSS_NAME}:${DOCKER_TAG}
+    docker rmi ${DOCKER_REGISTRY}/${DOCKER_REPOSITORY}/${OAI_MME_NAME}:${DOCKER_TAG}
+    docker rmi ${DOCKER_REGISTRY}/${DOCKER_REPOSITORY}/${OAI_SPGWC_NAME}:${DOCKER_TAG}
+    docker rmi ${DOCKER_REGISTRY}/${DOCKER_REPOSITORY}/${OAI_SPGWU_NAME}:${DOCKER_TAG}
+
+.PHONY: build-all build-base build-enb build-hss build-mme build-spgwc build-spgwu clean
