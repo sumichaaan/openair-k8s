@@ -49,7 +49,7 @@ COPY --from=builder /usr/local/lib/libfd* /usr/local/lib/
 COPY --from=builder /usr/local/lib/freeDiameter/* /usr/local/lib/freeDiameter/
 COPY --from=builder /usr/local/lib/x86_64-linux-gnu/libcassandra* /usr/local/lib/x86_64-linux-gnu/
 COPY --from=builder /usr/local/lib/libuv.so /usr/local/lib/
-# COPY --from=builder /usr/lib/x86_64-linux-gnu/libuv* /usr/lib/x86_64-linux-gnu/
+COPY --from=builder /usr/lib/x86_64-linux-gnu/libuv* /usr/lib/x86_64-linux-gnu/
 
 # Loading libuv.so and so on
 RUN ldconfig
