@@ -65,4 +65,4 @@ EXPOSE 9042/tcp 5868/tcp 9080/tcp 9081/tcp
 VOLUME ["${APP_ROOT}/certs"]
 
 CMD ["/opt/oai-hss/bin/oai_hss", "-j", "/opt/oai-hss/etc/hss_rel14.json"]
-ENTRYPOINT ["/opt/oai-hss/bin/entrypoint.sh"]
+ENTRYPOINT ["/opt/oai-hss/bin/entrypoint.bash"]
