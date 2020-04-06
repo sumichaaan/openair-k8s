@@ -12,8 +12,6 @@ ARG GIT_OPENAIRCNCUPS_URL="https://github.com/OPENAIRINTERFACE/openair-cn-cups.g
 ARG GIT_SPDLOG_URL="https://github.com/gabime/spdlog.git"
 RUN git clone --depth=1 --branch=$GIT_TAG ${GIT_OPENAIRCNCUPS_URL}
 RUN git clone --depth=1 --branch=master ${GIT_SPDLOG_URL} openair-cn-cups/build/ext/spdlog
-COPY patches patches/
-RUN patch -p1 -d openair-cn-cups < patches/enable_sudo-less_build.patch
 
 RUN cd openair-cn-cups/build/scripts && \
     ./build_spgwu -c -v -b RelWithDebInfo -j
