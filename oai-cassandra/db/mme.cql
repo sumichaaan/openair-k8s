@@ -1,0 +1,1 @@
+INSERT INTO vhss.mmeidentity (idmmeidentity, mmeisdn, mmehost, mmerealm, ue_reachability) VALUES (4, 'mme-isdn', 'mme.openair4G.eur', 'openair4G.eur', 1); INSERT INTO vhss.mmeidentity_host (idmmeidentity, mmeisdn, mmehost, mmerealm, ue_reachability) VALUES (4, 'mme-isdn', 'mme.openair4G.eur', 'openair4G.eur', 1);
