@@ -1,4 +1,4 @@
-# Openairinterface on Kubernetes for Ubuntu
+# OpenAirInterface on Kubernetes for Ubuntu
 
 openair-k8s-ubuntu is inspired by OPENAIRINTERFACE/openair-k8s and can be built on Docker, Kubernetes, and Ubuntu distribution. Currently, we tested some operation of each component alone with Ubuntu 18.04.3 LTS (Bionic).
 
@@ -12,6 +12,10 @@ sudo apt update
 sudo apt install -y 
 sudo apt-get install -y linux-image-5.3.0-42-lowlatency linux-headers-5.3.0-42-lowlatency
 sudo reboot
+```
+
+#### Disabling Swap
+```
 sudo swapoff -a
 ```
 
