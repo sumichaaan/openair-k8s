@@ -2,6 +2,8 @@
 
 openair-k8s-ubuntu is inspired by OPENAIRINTERFACE/openair-k8s and can be built on Docker, Kubernetes, and Ubuntu distribution. Currently, we tested some operation of each component alone with Ubuntu 18.04.3 LTS (Bionic).
 
+Note: We used  Ubuntu 18.04.3 LTS (Bionic), Docker CE 19.03, OAI(RAN) 1.2.1, and OAI-CN/CUPS develop-vco3 branch as test environment.
+
 ## Building OAI Container Images
 
 ### Prerequisites for all nodes
