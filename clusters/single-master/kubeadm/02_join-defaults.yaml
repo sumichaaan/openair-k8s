@@ -1,0 +1,14 @@
+apiVersion: kubeadm.k8s.io/v1beta2
+caCertPath: /etc/kubernetes/pki/ca.crt
+discovery:
+  bootstrapToken:
+    apiServerEndpoint: 12.34.56.78:6443
+    token: nq9nmo.qmqa3fndev38vnvq
+    unsafeSkipCAVerification: true
+  timeout: 5m0s
+  tlsBootstrapToken: nq9nmo.qmqa3fndev38vnvq
+kind: JoinConfiguration
+nodeRegistration:
+  criSocket: /var/run/dockershim.sock
+  name: yourhostname
+  taints: null
