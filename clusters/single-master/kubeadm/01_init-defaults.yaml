@@ -59,7 +59,7 @@ clientConnection:
   contentType: ""
   kubeconfig: /var/lib/kube-proxy/kubeconfig.conf
   qps: 0
-clusterCIDR: 172.16.0.0/16
+clusterCIDR: 172.20.0.0/16
 configSyncPeriod: 0s
 conntrack:
   maxPerCore: null
