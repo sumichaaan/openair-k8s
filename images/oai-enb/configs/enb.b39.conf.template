@@ -9,12 +9,12 @@ eNBs =
 
     real_time = "no";
 
-    eNB_ID    =  0xe00;
-    eNB_name  =  "eNB-Eurecom-LTEBox";
+    eNB_ID    =  ${ENB_ID};
+    eNB_name  =  "${ENB_NAME}";
     cell_type =  "CELL_MACRO_ENB";
 
     // Tracking area code, 0x0000 and 0xfffe are reserved values
-    tracking_area_code = ${TAC};
+    tracking_area_code  = ${TAC};
     plmn_list = ( { mcc = ${MCC}; mnc = ${MNC}; mnc_length = ${MNC_LENGTH}; } );
 
     tr_s_preference     = "local_mac"
