@@ -22,7 +22,7 @@ apiServer:
   timeoutForControlPlane: 4m0s
 apiVersion: kubeadm.k8s.io/v1beta2
 certificatesDir: /etc/kubernetes/pki
-clusterName: ool
+clusterName: ool-testbed
 controllerManager: {}
 dns:
   type: CoreDNS
