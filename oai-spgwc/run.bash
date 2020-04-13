@@ -6,6 +6,7 @@ docker run \
 	-e SGW_S11_INTERFACE="eth0" \
 	-e UE_IP_ADDRESS_POOL="192.168.20.2-192.168.20.200" \
 	-e UE_DNS_SERVER="8.8.8.8" \
+        -e FORCE_PUSH_PCO="yes" \
         -p 8805:8805 \
 	-p 2123:2123 \
         -h spgwc.openair4G.eur \
