@@ -21,6 +21,18 @@ spec:
       securityContext:
         runAsUser: 0
         runAsGroup: 0
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: eutran-rf-devices-enabled
+                operator: In
+                values:
+                - true
+            - matchExpressions:
+              - key: ngran-rf-devices-enabled
+                operator: DoesNotExist
       containers:
       - name: enb
         image: image-registry.openshift-image-registry.svc:5000/oai/oai-enb
