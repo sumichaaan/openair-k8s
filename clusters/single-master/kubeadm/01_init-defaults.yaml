@@ -22,7 +22,7 @@ apiServer:
   timeoutForControlPlane: 4m0s
 apiVersion: kubeadm.k8s.io/v1beta2
 certificatesDir: /etc/kubernetes/pki
-clusterName: plte
+clusterName: ool
 controllerManager: {}
 dns:
   type: CoreDNS
@@ -34,5 +34,6 @@ kind: ClusterConfiguration
 kubernetesVersion: v1.18.0
 networking:
   dnsDomain: cluster.local
+  podSubnet: 172.20.0.0/16
   serviceSubnet: 10.96.0.0/12
 scheduler: {}
