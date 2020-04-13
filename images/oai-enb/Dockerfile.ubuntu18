@@ -46,6 +46,9 @@ COPY --from=builder /usr/local/lib /usr/local/lib
 COPY --from=builder /usr/lib/x86_64-linux-gnu /usr/lib/x86_64-linux-gnu
 COPY --from=builder /lib/x86_64-linux-gnu /lib/x86_64_linux-gnu
 
+COPY scripts ${APP_ROOT}/bin/
+COPY configs ${APP_ROOT}/etc/
+
 RUN ldconfig
 
 WORKDIR ${APP_ROOT}
