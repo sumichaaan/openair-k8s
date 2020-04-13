@@ -23,13 +23,13 @@ sudo swapoff -a
 
 #### Setting kernel parameters and disabling iptables with nftables
 ```
-cat > /etc/sysctl.d/99-kubernetes-cri.conf <<EOF
+sudo cat > /etc/sysctl.d/99-kubernetes-cri.conf <<EOF
 net.bridge.bridge-nf-call-iptables  = 1
 net.ipv4.ip_forward                 = 1
 net.bridge.bridge-nf-call-ip6tables = 1
 EOF
 
-sysctl --system
+sudo sysctl --system
 
 # Disable iptables with nftables
 sudo apt-get install -y iptables arptables ebtables
