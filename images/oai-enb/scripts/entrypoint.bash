@@ -3,13 +3,13 @@
 set -eo pipefail # don't set 'u' as we need to explicityly test for undefined vars
 
 CONFIG_DIR="/opt/oai-enb/etc"
-DEFAULT_MODE="RCC_BAND38"
+DEFAULT_MODE="ENB_BAND39"
 MNC_LENGTH=${MNC_LENGTH:-${#MNC}}
 
 # look up configuration template to use
 MODE=${MODE:-${DEFAULT_MODE}}
 case "${MODE^^}" in
-    RCC_BAND39_AIO) TEMPLATE=${CONFIG_DIR}/enb.b39.conf.template;;
+    ENB_BAND39)     TEMPLATE=${CONFIG_DIR}/enb.b39.conf.template;;
     RCC_BAND38_IF5) TEMPLATE=${CONFIG_DIR}/rcc.b38.if5.conf.template;;
     RCC_BAND38)     TEMPLATE=${CONFIG_DIR}/rcc.b38.conf.template;;
     RCC_BAND40)     TEMPLATE=${CONFIG_DIR}/rcc.band40.tm1.25PRB.FairScheduler.usrpb210.conf.template;;
