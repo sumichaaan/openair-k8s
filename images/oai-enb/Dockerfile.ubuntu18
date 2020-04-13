@@ -64,4 +64,5 @@ EXPOSE 50000/udp
 EXPOSE 50001/udp
 
 # Run lte-softmodem with a sample option for USRP
-CMD ["lte-softmodem", "-O", "/config/enb.conf"]
+CMD ["/opt/oai-enb/bin/lte-softmodem", "-O", "/opt/oai-enb/etc/enb.conf"]
+ENTRYPOINT ["/opt/oai-enb/bin/entrypoint.bash"]
