@@ -11,7 +11,6 @@ Note: We used  Ubuntu 18.04.3 LTS (Bionic), Docker CE 19.03, OAI(RAN) 1.2.1, and
 #### Upgrade to low-latency kernel (for realtime handling)
 ```
 sudo apt update
-sudo apt install -y 
 sudo apt-get install -y \
     linux-image-5.3.0-42-lowlatency \
     linux-headers-5.3.0-42-lowlatency
