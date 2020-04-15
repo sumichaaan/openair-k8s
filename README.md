@@ -12,7 +12,9 @@ Note: We used  Ubuntu 18.04.3 LTS (Bionic), Docker CE 19.03, OAI(RAN) 1.2.1, and
 ```
 sudo apt update
 sudo apt install -y 
-sudo apt-get install -y linux-image-5.3.0-42-lowlatency linux-headers-5.3.0-42-lowlatency
+sudo apt-get install -y \
+    linux-image-5.3.0-42-lowlatency \
+    linux-headers-5.3.0-42-lowlatency
 sudo reboot
 ```
 
@@ -32,7 +34,10 @@ EOF
 sudo sysctl --system
 
 # Disable iptables with nftables
-sudo apt-get install -y iptables arptables ebtables
+sudo apt-get install -y \
+    iptables=1.6.1-2ubuntu2 \
+    arptables=0.0.3.4-1build1 \
+    ebtables=2.0.10.4-3.5ubuntu2.18.04.3
 
 sudo update-alternatives --set iptables /usr/sbin/iptables-legacy
 sudo update-alternatives --set ip6tables /usr/sbin/ip6tables-legacy
@@ -42,10 +47,20 @@ sudo update-alternatives --set ebtables /usr/sbin/ebtables-legacy
 
 #### Installing Docker CE
 ```
-sudo apt-get install -y apt-transport-https ca-certificates curl software-properties-common gnupg2 pass
+sudo apt-get install -y \
+    apt-transport-https=1.6.12 \
+    ca-certificates=20180409 \
+    curl=7.58.0-2ubuntu3.8 \
+    software-properties-common=0.96.24.32.12 \
+    gnupg2=2.2.4-1ubuntu1.2 \
+    pass=1.7.1-3
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
-sudo apt-get update && sudo apt-get install -y containerd.io=1.2.10-3 docker-ce=5:19.03.4~3-0~ubuntu-$(lsb_release -cs) docker-ce-cli=5:19.03.4~3-0~ubuntu-$(lsb_release -cs)
+sudo apt-get update
+sudo apt-get install -y \
+    containerd.io=1.2.10-3
+    docker-ce=5:19.03.4~3-0~ubuntu-$(lsb_release -cs)
+    docker-ce-cli=5:19.03.4~3-0~ubuntu-$(lsb_release -cs)
 sudo tee -a /etc/docker/daemon.json <<EOF
 {
   "exec-opts": ["native.cgroupdriver=systemd"],
@@ -72,7 +87,10 @@ cat <<EOF | sudo tee /etc/apt/sources.list.d/kubernetes.list
 deb https://apt.kubernetes.io/ kubernetes-xenial main
 EOF
 sudo apt-get update
-sudo apt-get install -y kubelet kubeadm kubectl
+sudo apt-get install -y \
+    kubelet=1.18.1-00 \
+    kubeadm=1.18.1-00 \
+    kubectl=1.18.1-00
 sudo apt-mark hold kubelet kubeadm kubectl
 ```
 
@@ -80,7 +98,7 @@ sudo apt-mark hold kubelet kubeadm kubectl
 
 #### Installing a tool to control some hardware devices.
 ```
-sudo apt install -y cpufrequtils
+sudo apt install -y cpufrequtils=008-1build1
 echo 'GOVERNOR="performance"' | tee -a /etc/default/cpufrequtils
 ```
 
