@@ -93,6 +93,14 @@ sudo apt-get install -y \
 sudo apt-mark hold kubelet kubeadm kubectl
 ```
 
+#### Replacing CNI plugins and CRI tools
+```
+sudo rm -f /opt/cni/bin/*
+sudo rm -f /usr/bin/crictl
+curl -L "https://github.com/containernetworking/plugins/releases/download/v0.8.5/cni-plugins-linux-amd64-v0.8.5.tgz" | sudo tar -C /opt/cni/bin -xz
+curl -L "https://github.com/kubernetes-incubator/cri-tools/releases/download/v1.18.0/crictl-v1.18.0-linux-amd64.tar.gz" | sudo tar -C /opt/bin -xz
+```
+
 ### Prerequisites for e-NodeB nodes
 
 #### Installing a tool to control some hardware devices.
