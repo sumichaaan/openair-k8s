@@ -107,4 +107,5 @@ echo "blacklist intel_powerclamp" | sudo tee -a /etc/modprobe.d/blacklist.conf
 sudo vim /etc/default/grub
 => Added the following parameters
 GRUB_CMDLINE_LINUX_DEFAULT="intel_pstate=disable processor.max_cstate=1 intel_idle.max_cstate=0 idle=poll"
+sudo update-grub
 ```
