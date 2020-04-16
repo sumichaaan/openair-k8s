@@ -98,7 +98,7 @@ sudo apt-mark hold kubelet kubeadm kubectl
 #### Installing a tool to control some hardware devices.
 ```
 sudo apt install -y cpufrequtils=008-1build1
-echo 'GOVERNOR="performance"' | tee -a /etc/default/cpufrequtils
+echo 'GOVERNOR="performance"' | sudo tee -a /etc/default/cpufrequtils
 ```
 
 #### Configuration of kernel modules and GRUB parameters
