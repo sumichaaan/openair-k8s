@@ -48,7 +48,7 @@ build-enb: build-base
 
 .PHONY: build-rru
 build-rru: build-base
-        ${DOCKER_ENV} docker build ${DOCKER_BUILD_ARGS} \
+	${DOCKER_ENV} docker build ${DOCKER_BUILD_ARGS} \
                     --tag ${RRU_IMAGE_NAME} \
                     --file ./images/${OAI_RRU_NAME}/Dockerfile.ubuntu${OS_RELEASE} \
                     --build-arg REGISTRY=${DOCKER_REGISTRY} \
