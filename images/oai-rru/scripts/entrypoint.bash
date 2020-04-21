@@ -2,7 +2,7 @@
 
 set -eo pipefail # don't set 'u' as we need to explicityly test for undefined vars
 
-CONFIG_DIR="/opt/oai-ue/etc"
+CONFIG_DIR="/opt/oai-rru/etc"
 TEMPLATE=${CONFIG_DIR}/rru.conf.template
 
 # grep variable names (format: ${VAR}) from template to be rendered
