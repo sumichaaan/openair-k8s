@@ -12,6 +12,7 @@ case "${MODE^^}" in
     ENB_BAND39)     TEMPLATE=${CONFIG_DIR}/enb.b39.conf.template;;
     RCC_BAND38_IF5) TEMPLATE=${CONFIG_DIR}/rcc.b38.if5.conf.template;;
     RCC_BAND38)     TEMPLATE=${CONFIG_DIR}/rcc.b38.conf.template;;
+    RCC_BAND39)     TEMPLATE=${CONFIG_DIR}/rcc.b39.conf.template;;
     RCC_BAND40)     TEMPLATE=${CONFIG_DIR}/rcc.band40.tm1.25PRB.FairScheduler.usrpb210.conf.template;;
     RRU)            TEMPLATE=${CONFIG_DIR}/rru.tdd.band40.conf.template;;
     *)              echo "Unkown mode '${MODE}'."; exit 1;;
