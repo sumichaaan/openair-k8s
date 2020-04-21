@@ -21,6 +21,15 @@ spec:
       securityContext:
         runAsUser: 0
         runAsGroup: 0
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: rf-device-type
+                operator: In
+                values:
+                - "eutran"
       containers:
       - name: ue
         image: image-registry.openshift-image-registry.svc:5000/oai/oai-ue

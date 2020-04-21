@@ -26,13 +26,10 @@ spec:
           requiredDuringSchedulingIgnoredDuringExecution:
             nodeSelectorTerms:
             - matchExpressions:
-              - key: eutran-rf-devices-enabled
+              - key: rf-device-type
                 operator: In
                 values:
-                - true
-            - matchExpressions:
-              - key: ngran-rf-devices-enabled
-                operator: DoesNotExist
+                - "eutran"
       containers:
       - name: enb
         image: image-registry.openshift-image-registry.svc:5000/oai/oai-enb
