@@ -21,7 +21,7 @@ for v in ${VARS}; do
 done
 EXPRESSIONS="${EXPRESSIONS#';'}"
 
-# render template and write to ue.conf
+# render template and write to rru.conf
 sed "${EXPRESSIONS}" ${TEMPLATE} > ${CONFIG_DIR}/rru.conf
 
 exec "$@"
