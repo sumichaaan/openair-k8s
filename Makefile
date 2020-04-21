@@ -47,7 +47,7 @@ build-enb: build-base
                     ./images/${OAI_ENB_NAME}
 
 .PHONY: build-rru
-build-enb: build-base
+build-rru: build-base
         ${DOCKER_ENV} docker build ${DOCKER_BUILD_ARGS} \
                     --tag ${RRU_IMAGE_NAME} \
                     --file ./images/${OAI_RRU_NAME}/Dockerfile.ubuntu${OS_RELEASE} \
