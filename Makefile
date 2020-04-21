@@ -4,6 +4,7 @@ OS_RELEASE              ?= $(shell cat /etc/lsb-release | grep RELEASE | awk -F=
 
 OAI_BASE_NAME           ?= oai-build-base
 OAI_ENB_NAME            ?= oai-enb
+OAI_RRU_NAME            ?= oai-rru
 OAI_MME_NAME            ?= oai-mme
 OAI_HSS_NAME            ?= oai-hss
 OAI_SPGWC_NAME          ?= oai-spgwc
@@ -17,6 +18,7 @@ DOCKER_BUILD_ARGS       ?= --rm
 
 BASE_IMAGE_NAME         ?= ${DOCKER_REGISTRY}/${DOCKER_REPOSITORY}/${OAI_BASE_NAME}:${DOCKER_TAG}
 ENB_IMAGE_NAME          ?= ${DOCKER_REGISTRY}/${DOCKER_REPOSITORY}/${OAI_ENB_NAME}:${DOCKER_TAG}
+RRU_IMAGE_NAME          ?= ${DOCKER_REGISTRY}/${DOCKER_REPOSITORY}/${OAI_RRU_NAME}:${DOCKER_TAG}
 MME_IMAGE_NAME          ?= ${DOCKER_REGISTRY}/${DOCKER_REPOSITORY}/${OAI_MME_NAME}:${DOCKER_TAG}
 HSS_IMAGE_NAME          ?= ${DOCKER_REGISTRY}/${DOCKER_REPOSITORY}/${OAI_HSS_NAME}:${DOCKER_TAG}
 SPGWC_IMAGE_NAME        ?= ${DOCKER_REGISTRY}/${DOCKER_REPOSITORY}/${OAI_SPGWC_NAME}:${DOCKER_TAG}
@@ -24,7 +26,7 @@ SPGWU_IMAGE_NAME        ?= ${DOCKER_REGISTRY}/${DOCKER_REPOSITORY}/${OAI_SPGWU_N
 
 
 
-build-all: build-base build-enb build-hss build-mme build-spgwc build-spgwu
+build-all: build-base build-enb build-rru build-hss build-mme build-spgwc build-spgwu
 
 
 .PHONY: build-base
@@ -43,6 +45,16 @@ build-enb: build-base
                     --build-arg REPOSITORY=${DOCKER_REPOSITORY} \
                     --build-arg TAG=${DOCKER_TAG} \
                     ./images/${OAI_ENB_NAME}
+
+.PHONY: build-rru
+build-enb: build-base
+        ${DOCKER_ENV} docker build ${DOCKER_BUILD_ARGS} \
+                    --tag ${RRU_IMAGE_NAME} \
+                    --file ./images/${OAI_RRU_NAME}/Dockerfile.ubuntu${OS_RELEASE} \
+                    --build-arg REGISTRY=${DOCKER_REGISTRY} \
+                    --build-arg REPOSITORY=${DOCKER_REPOSITORY} \
+                    --build-arg TAG=${DOCKER_TAG} \
+                    ./images/${OAI_RRU_NAME}
 
 .PHONY: build-hss
 build-hss: build-base
@@ -87,6 +99,7 @@ build-spgwu: build-base
 clean:
 	docker rmi ${DOCKER_REGISTRY}/${DOCKER_REPOSITORY}/${OAI_BASE_NAME}:${DOCKER_TAG}
 	docker rmi ${DOCKER_REGISTRY}/${DOCKER_REPOSITORY}/${OAI_ENB_NAME}:${DOCKER_TAG}
+	docker rmi ${DOCKER_REGISTRY}/${DOCKER_REPOSITORY}/${OAI_RRU_NAME}:${DOCKER_TAG}
 	docker rmi ${DOCKER_REGISTRY}/${DOCKER_REPOSITORY}/${OAI_HSS_NAME}:${DOCKER_TAG}
 	docker rmi ${DOCKER_REGISTRY}/${DOCKER_REPOSITORY}/${OAI_MME_NAME}:${DOCKER_TAG}
 	docker rmi ${DOCKER_REGISTRY}/${DOCKER_REPOSITORY}/${OAI_SPGWC_NAME}:${DOCKER_TAG}
