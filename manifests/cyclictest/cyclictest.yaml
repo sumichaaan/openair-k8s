@@ -1,12 +1,15 @@
-apiVersion: v1 
-kind: Pod 
+apiVersion: v1
+kind: Pod
 metadata:
-  name: cyclictest 
+  name: cyclictest
+  namespace: oai
 spec:
-  restartPolicy: Never 
+  restartPolicy: Never
   containers:
   - name: cyclictest
     image:  docker.io/cscojianzhan/cyclictest
+    # command: []
+    # args: ["cyclictest", "--smp", "--priority=80", "--interval=200","--distance=0"]
     resources:
       limits:
         cpu: 4
@@ -16,8 +19,9 @@ spec:
         memory: "400Mi"
     env:
     - name: DURATION
-      value: "10m"
+      value: "2m"
     securityContext:
+      privileged: true
       capabilities:
         add:
           - SYS_NICE
@@ -29,7 +33,7 @@ spec:
     - mountPath: /dev/cpu_dma_latency
       name: cstate
   nodeSelector:
-    node-role.kubernetes.io/worker-rt: ""
+    rf-device-type: "eutran"
   volumes:
   - name: results-volume
     hostPath:
