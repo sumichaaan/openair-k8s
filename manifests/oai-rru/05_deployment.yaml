@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: oai-ue
+  name: oai-rru
   labels:
-    app: oai-ue
+    app: oai-rru
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: oai-ue
+      app: oai-rru
   strategy:
     type: Recreate
   template:
     metadata:
       labels:
-        app: oai-ue
+        app: oai-rru
       annotations:
-        k8s.v1.cni.cncf.io/networks: ue-net1
+        k8s.v1.cni.cncf.io/networks: rru-net1
     spec:
       securityContext:
         runAsUser: 0
@@ -31,38 +31,39 @@ spec:
                 values:
                 - "eutran"
       containers:
-      - name: ue
-        image: image-registry.openshift-image-registry.svc:5000/oai/oai-ue
+      - name: rru
+        image: image-registry.openshift-image-registry.svc:5000/oai/oai-rru
         imagePullPolicy: Always
-        #command: ['sh', '-c', 'sleep 6000']
+        #command: ['sh', '-c', 'sleep 60d00']
         securityContext:
           privileged: true
         ports:
         - containerPort: 50000
           name: if4p5-c
+          protocol: UDP
         - containerPort: 50001
           name: if4p5-u
+          protocol: UDP
         env:
-          # eNB env vars
           - name: RU_LOCAL_IF
             valueFrom:
               configMapKeyRef:
-                name: ue-config
+                name: rru-config
                 key: ru_local_if
           - name: RU_LOCAL_IP
             valueFrom:
               configMapKeyRef:
-                name: ue-config
+                name: rru-config
                 key: ru_local_ip
           - name: RU_REMOTE_IP
             valueFrom:
               configMapKeyRef:
-                name: ue-config
+                name: rru-config
                 key: ru_remote_ip
           - name: BAND
             valueFrom:
               configMapKeyRef:
-                name: ue-config
+                name: rru-config
                 key: band
       - name: tcpdump
         image: corfr/tcpdump
@@ -72,5 +73,5 @@ spec:
       dnsPolicy: ClusterFirst
       restartPolicy: Always
       schedulerName: default-scheduler
-      serviceAccountName: ue-sa
+      serviceAccountName: rru-sa
       terminationGracePeriodSeconds: 30
