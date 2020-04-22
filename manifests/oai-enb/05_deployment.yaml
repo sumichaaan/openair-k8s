@@ -132,6 +132,11 @@ spec:
               configMapKeyRef:
                 name: enb-config
                 key: x2c_ip
+          - name: MODE
+            valueFrom:
+              configMapKeyRef:
+                name: enb-config
+                key: mode
       - name: tcpdump
         image: corfr/tcpdump
         command:
