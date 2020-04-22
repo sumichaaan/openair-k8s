@@ -6,5 +6,6 @@ resources:
 - oai-spgwc
 - oai-spgwu
 - oai-enb
+- oai-rru
 
 namespace: oai
