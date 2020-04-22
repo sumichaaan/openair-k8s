@@ -58,6 +58,6 @@ EXPOSE 50001/udp
 
 # Run lte-softmodem with a sample option for USRP
 CMD ["/opt/oai-rru/bin/lte-softmodem", \
-    "-C", "1900000000", "-r", "25", "--nokrnmod", "1", \
+    "-C", "1900000000", "--nokrnmod", "1", \
     "-O", "/opt/oai-rru/etc/rru.conf"]
 ENTRYPOINT ["/opt/oai-rru/bin/entrypoint.sh"]

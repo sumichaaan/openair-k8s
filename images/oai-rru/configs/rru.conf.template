@@ -12,7 +12,7 @@ RUs = (
         nb_tx                           = 1
         nb_rx                           = 1
         max_pdschReferenceSignalPower   = -27;
-        max_rxgain                      = 110;
+        max_rxgain                      = 115;
         bands                           = [${BAND}];
     }
 );
