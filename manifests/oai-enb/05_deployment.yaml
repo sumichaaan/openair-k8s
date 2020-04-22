@@ -48,8 +48,10 @@ spec:
           name: x2c
         - containerPort: 50000
           name: if5-ori
+          protocol: UDP
         - containerPort: 50001
           name: if5-ecpri
+          protocol: UDP
         env:
           # eNB env vars
           - name: ENB_ID
