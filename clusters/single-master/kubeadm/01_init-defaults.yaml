@@ -38,6 +38,7 @@ networking:
 apiServer:
   extraArgs:
     authorization-mode: "Node,RBAC"
+    feature-gates: SCTPSupport=true
   timeoutForControlPlane: 4m0s
 controllerManager:
   extraArgs:
